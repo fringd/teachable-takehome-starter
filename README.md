@@ -2,29 +2,39 @@
 
 ## Getting Started
 
-Clone this repo (or make your own repo, read more about this in "Technical Requirements"). CD into the project folder and then run:
+To install, clone this repo
 
     yarn install
-
-Once the installation is complete, run:
+    
+To run:
 
     npm start
 
 ## Project Instructions
 
-You're going to be building a Ruby Gems search feature. Hit the search API and have the relevant gems show with the description of them, and links to their listed dependencies within this interface. Your app should be able to keep track of “favorites”, which are Gems the user has starred.
+Ruby Gem search - A simple site that takes in a search term, hits the [API](#api) and displays the returned results.
 
-There are a few other notes and requirements:
+### Requirements
 
-- You should be able to add a search result to favorites in your UI.
-- There should be some way to review and remove favorites.
-- localStorage is fine for storage
+- Be able to search for Ruby Gems
+- Display Ruby Gems search results
+  - Name
+  - Author
+  - Description
+  - Links to listed dependencies
+- Be able to add/remove/view favorite Ruby Gems
+
+There is no need to create a fancy and complex user interface but some level of design is required.
+
+Minified/production ready builds are not a requirement.
 
 ## API
 
-If you attempt to hit the Ruby Gems API directly you'll run into CORS issues. So we built
-a proxy server for you. Just make your API requests to `http://localhost:3000/` instead
-of `https://rubygems.org`. For example:
+Attempting to hit the Ruby Gems API directly will result in CORS issues. A proxy server is provided for you.
+
+Make API requests to `http://localhost:3000/` instead of `https://rubygems.org`.
+
+For example:
 
     curl http://localhost:3000/api/v1/search.json?query=rails
 
@@ -32,11 +42,14 @@ This server starts up automatically when you run `npm start`.
 
 ## Technical Requirements
 
-This repo is based on webpack-babel-starter. You can add anything you like here, like React, Angular, or Vue for example. You can also completely ditch this repo and use your own starter or something like `create-react-app`.
+This repo is based on webpack-babel-starter. It is not a requirement to use any of it.
+
+There are no restrictions on libraries, frameworks, packages or generators that you can use.
 
 ## After You Finish
 
-Once you’re done, push your changes onto a repo and share with us. If you get stuck at any point, reach out to your contact at Teachable and we can help you out.
+Once you’re done, push your changes onto a repo and share with us.
 
-Don't worry about creating a production build. We're more interested in your code in
-action than seeing an optimized, production-ready app.
+<hr>
+
+If you get stuck at any point, reach out to your contact at Teachable and we can help you out.
