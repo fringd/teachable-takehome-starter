@@ -3,8 +3,7 @@
   "version": "2.0.1",
   "description": "Webpack Babel Starter Kit",
   "scripts": {
-    "postinstall": "node ./contributing/bin/install-warning-message.js",
-    "start": "npm run webpack",
+    "start": "node ./api | npm run webpack",
     "test": "npm run lint",
     "lint": "./node_modules/.bin/eslint src",
     "lint-fix": "./node_modules/.bin/eslint --fix src --ext .js",
@@ -17,10 +16,7 @@
     "postbuild-prod-all": "npm run generate-dist-readme",
     "webpack": "./node_modules/.bin/webpack-dev-server --progress --colors --hot --inline",
     "webpack-build": "./node_modules/.bin/webpack --progress",
-    "webpack-build-prod": "./node_modules/.bin/webpack --progress -p",
-    "generate-dist-readme": "node bin/generate-dist-readme.js",
-    "contributing-install": "./contributing/bin/contributing-install.sh",
-    "contributing-test": "./contributing/bin/contributing-test.sh"
+    "webpack-build-prod": "./node_modules/.bin/webpack --progress -p"
   },
   "pre-commit": [
     "test"
@@ -38,9 +34,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/topheman/webpack-babel-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/topheman/webpack-babel-starter/issues"
   },
   "license": "MIT",
   "devDependencies": {
@@ -75,5 +68,9 @@
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "express": "^4.15.4",
+    "request": "^2.81.0"
+  }
 }

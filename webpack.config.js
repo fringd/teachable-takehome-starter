@@ -11,12 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const myLocalIp = require('my-local-ip');
 const common = require('./common');
 const plugins = [];
-
-const BANNER = common.getBanner();
-const BANNER_HTML = common.getBannerHtml();
-
 const root = __dirname;
-
 const MODE_DEV_SERVER = process.argv[1].indexOf('webpack-dev-server') > -1 ? true : false;
 
 log.info('webpack', 'Launched in ' + (MODE_DEV_SERVER ? 'dev-server' : 'build') + ' mode');
@@ -27,7 +22,6 @@ const BUILD_DIR = './build';
 const DIST_DIR = process.env.DIST_DIR || 'dist';// relative to BUILD_DIR
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV.toLowerCase() : 'development';
 const DEVTOOLS = process.env.DEVTOOLS ? JSON.parse(process.env.DEVTOOLS) : null;// can be useful in case you have web devtools (null by default to differentiate from true or false)
-// optimize in production by default - otherwize, override with OPTIMIZE=false flag (if not optimized, sourcemaps will be generated)
 const OPTIMIZE = process.env.OPTIMIZE ? JSON.parse(process.env.OPTIMIZE) : NODE_ENV === 'production';
 const LINTER = process.env.LINTER ? JSON.parse(process.env.LINTER) : true;
 const FAIL_ON_ERROR = process.env.FAIL_ON_ERROR ? JSON.parse(process.env.FAIL_ON_ERROR) : !MODE_DEV_SERVER;// disabled on dev-server mode, enabled in build mode
@@ -44,6 +38,7 @@ if (/^\w+/.test(DIST_DIR) === false || /\/$/.test(DIST_DIR) === true) { // @todo
 }
 
 log.info('webpack', `${NODE_ENV.toUpperCase()} mode`);
+
 if (DEVTOOLS) {
   log.info('webpack', 'DEVTOOLS active');
 }
@@ -61,29 +56,23 @@ if(!FAIL_ON_ERROR) {
 }
 
 plugins.push(new HtmlWebpackPlugin({
-  title: 'Topheman - Webpack Babel Starter Kit',
   template: 'src/index.ejs', // Load a custom template
   inject: MODE_DEV_SERVER, // inject scripts in dev-server mode - in build mode, use the template tags
   MODE_DEV_SERVER: MODE_DEV_SERVER,
   DEVTOOLS: DEVTOOLS,
-  BANNER_HTML: BANNER_HTML
 }));
-// extract css into one main.css file
+
 const extractSass = new ExtractTextPlugin({
   filename: `main${hash}.css`,
   disable: false,
   allChunks: true
 });
 plugins.push(extractSass);
-plugins.push(new webpack.BannerPlugin(BANNER));
 plugins.push(new webpack.DefinePlugin({
-  // Lots of library source code (like React) are based on process.env.NODE_ENV
-  // (all development related code is wrapped inside a conditional that can be dropped if equal to "production"
-  // this way you get your own react.min.js build)
   'process.env':{
     'NODE_ENV': JSON.stringify(NODE_ENV),
-    'DEVTOOLS': DEVTOOLS, // You can rely on this var in your code to enable specific features only related to development (that are not related to NODE_ENV)
-    'LINTER': LINTER // You can choose to log a warning in dev if the linter is disabled
+    'DEVTOOLS': DEVTOOLS,
+    'LINTER': LINTER
   }
 }));
 
@@ -96,26 +85,21 @@ if (OPTIMIZE) {
 }
 
 if (NODE_ENV !== 'production') {
-  // to keep compatibility with old loaders - debug: true was previously on config
   plugins.push(new webpack.LoaderOptionsPlugin({
     debug: true
   }));
 }
 
 if (MODE_DEV_SERVER) {
-  // webpack-dev-server mode
   if(LOCALHOST) {
     log.info('webpack', 'Check http://localhost:8080');
-  }
-  else {
+  } else {
     log.info('webpack', 'Check http://' + myLocalIp() + ':8080');
   }
-}
-else {
-  // build mode
+} else {
   log.info('webpackbuild', `rootdir: ${root}`);
+
   if (STATS) {
-    //write infos about the build (to retrieve the hash) https://webpack.github.io/docs/long-term-caching.html#get-filenames-from-stats
     plugins.push(function() {
       this.plugin("done", function(stats) {
         require("fs").writeFileSync(
@@ -138,8 +122,7 @@ if (LINTER) {
     loader: 'eslint-loader',
     enforce: 'pre'
   });
-}
-else {
+} else {
   log.info('webpack', 'LINTER DISABLED');
 }
 
@@ -148,8 +131,8 @@ else {
 const config = {
   bail: FAIL_ON_ERROR,
   entry: {
-    'bundle': './src/bootstrap.js',
-    'main': './src/style/main.scss'
+    'main': './src/main.js',
+    'main': './src/main.scss'
   },
   output: {
     publicPath: '',
@@ -166,7 +149,7 @@ const config = {
     rules: [
       ...preLoaders,
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
