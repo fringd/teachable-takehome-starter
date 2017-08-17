@@ -26,7 +26,7 @@ If you attempt to hit the Ruby Gems API directly you'll run into CORS issues. So
 a proxy server for you. Just make your API requests to `http://localhost:3000/` instead
 of `https://rubygems.org`. For example:
 
-    curl -H https://rubygems.org/api/v1/search.json?query=rails
+    curl http://localhost:3000/api/v1/search.json?query=rails
 
 This server starts up automatically when you run `npm start`.
 
