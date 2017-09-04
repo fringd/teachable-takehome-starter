@@ -1,3 +1,12 @@
-<p>
-  gem works!
-</p>
+<md-card>
+  <h3><a href="TODO">{{gem.name}}</a> by {{gem.authors}}</h3> 
+  <p>Dependencies: 
+  <span *ngFor="let dependency of gem.dependencies.runtime">
+    <a href="TODO">{{dependency.name}}</a>
+  </span>
+  </p>
+  <p>
+    <a href="{{gem.gem_uri}}" md-raised-button>Download version {{gem.version}}</a>
+    {{gem.downloads}} downloads
+  </p>
+</md-card>

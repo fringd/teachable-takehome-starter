@@ -1,14 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+
+import { FormsModule } from '@angular/forms';
 
 import {
     MdButtonModule,
     MdMenuModule,
     MdToolbarModule,
     MdIconModule,
-    MdCardModule
+    MdCardModule,
+    MdInputModule
 } from '@angular/material';
 import { GemComponent } from './gem/gem.component';
 
@@ -18,14 +23,16 @@ import { GemComponent } from './gem/gem.component';
           MdMenuModule,
           MdToolbarModule,
           MdIconModule,
-          MdCardModule
+          MdCardModule,
+          MdInputModule,
         ],
     exports: [
           MdButtonModule,
           MdMenuModule,
           MdToolbarModule,
           MdIconModule,
-          MdCardModule
+          MdCardModule,
+          MdInputModule,
         ]
 })
 export class MaterialModule {}
@@ -33,11 +40,14 @@ export class MaterialModule {}
 @NgModule({
   declarations: [
     AppComponent,
-    GemComponent
+    GemComponent,
   ],
   imports: [
     BrowserModule,
-    MaterialModule
+    HttpModule,
+    MaterialModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
