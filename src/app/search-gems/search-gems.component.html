@@ -1,0 +1,10 @@
+<form (ngSubmit)="search()">
+  <md-form-field>
+    <input mdInput name="query" [(ngModel)]="query"  placeHolder="hello world">
+  </md-form-field>
+  <button md-raised-button color="primary" (click)="search()" [disabled]="searching"
+    >search</button>
+</form>
+
+<gem [gem]="gem" *ngFor="let gem of gems"></gem>
+

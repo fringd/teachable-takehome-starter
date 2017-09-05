@@ -1,8 +1,8 @@
 <md-card>
-  <h3><a href="TODO">{{gem.name}}</a> by {{gem.authors}}</h3> 
+  <h3> <a href="/gems/{{gem.name}}">{{gem.name}}</a> by {{gem.authors}}</h3> 
   <p>Dependencies: 
   <span *ngFor="let dependency of gem.dependencies.runtime">
-    <a href="TODO">{{dependency.name}}</a>
+    <a href="/gems/{{dependency.name}}">{{dependency.name}}</a>
   </span>
   </p>
   <p>

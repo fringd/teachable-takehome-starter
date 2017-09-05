@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { RouterModule, Routes } from '@angular/router';
+
+
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
@@ -16,6 +20,8 @@ import {
     MdInputModule
 } from '@angular/material';
 import { GemComponent } from './gem/gem.component';
+import { ShowGemComponent } from './show-gem/show-gem.component';
+import { SearchGemsComponent } from './search-gems/search-gems.component';
 
 @NgModule({
     imports: [
@@ -37,17 +43,35 @@ import { GemComponent } from './gem/gem.component';
 })
 export class MaterialModule {}
 
+
+const appRoutes: Routes = [
+    { path: 'gems/:id',      component: ShowGemComponent },
+    {
+          path: 'gems',
+          component: SearchGemsComponent,
+          data: { title: 'Heroes List' }
+        },
+    { path: '',
+          redirectTo: '/gems',
+          pathMatch: 'full'
+        },
+];
+
+
 @NgModule({
   declarations: [
     AppComponent,
     GemComponent,
+    ShowGemComponent,
+    SearchGemsComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     MaterialModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot( appRoutes, { enableTracing: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
