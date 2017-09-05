@@ -22,7 +22,7 @@ import {
 import { GemComponent } from './gem/gem.component';
 import { ShowGemComponent } from './show-gem/show-gem.component';
 import { SearchGemsComponent } from './search-gems/search-gems.component';
-
+import { FavoritesService } from "./favorites.service";
 @NgModule({
     imports: [
           MdButtonModule,
@@ -73,7 +73,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot( appRoutes, { enableTracing: true })
   ],
-  providers: [],
+  providers: [ FavoritesService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
