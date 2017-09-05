@@ -1,3 +1,21 @@
+<nav md-tab-nav-bar>
+  <a md-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="link"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{tabLink.label}}
+  </a>
+  <a md-tab-link
+     routerLinkActive #rla="routerLinkActive"
+
+routerLink="/gems">search</a>
+  <a 
+     routerLinkActive #rla="routerLinkActive"
+
+md-tab-link routerLink="/favorites">favorites</a>
+</nav>
+
 <router-outlet></router-outlet>
 
 

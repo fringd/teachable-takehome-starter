@@ -15,11 +15,13 @@ import {
     MdButtonModule,
     MdMenuModule,
     MdToolbarModule,
+    MdTabsModule,
     MdIconModule,
     MdCardModule,
     MdInputModule
 } from '@angular/material';
 import { GemComponent } from './gem/gem.component';
+import { ListFavoritesComponent } from './list-favorites/list-favorites.component';
 import { ShowGemComponent } from './show-gem/show-gem.component';
 import { SearchGemsComponent } from './search-gems/search-gems.component';
 import { FavoritesService } from "./favorites.service";
@@ -31,6 +33,7 @@ import { FavoritesService } from "./favorites.service";
           MdIconModule,
           MdCardModule,
           MdInputModule,
+          MdTabsModule,
         ],
     exports: [
           MdButtonModule,
@@ -39,6 +42,7 @@ import { FavoritesService } from "./favorites.service";
           MdIconModule,
           MdCardModule,
           MdInputModule,
+          MdTabsModule,
         ]
 })
 export class MaterialModule {}
@@ -49,7 +53,12 @@ const appRoutes: Routes = [
     {
           path: 'gems',
           component: SearchGemsComponent,
-          data: { title: 'Heroes List' }
+          data: { title: 'Gem search' }
+        },
+    {
+          path: 'favorites',
+          component: ListFavoritesComponent,
+          data: { title: 'Favorite gems' }
         },
     { path: '',
           redirectTo: '/gems',
@@ -64,6 +73,7 @@ const appRoutes: Routes = [
     GemComponent,
     ShowGemComponent,
     SearchGemsComponent,
+    ListFavoritesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,6 @@
+<div *ngFor="let name of favorites">
+  <button (click)="remove(name)" md-icon-button>
+    <md-icon>star</md-icon>
+  </button>
+  <a routerLink="/gems/{{name}}">{{name}}</a>
+</div>
